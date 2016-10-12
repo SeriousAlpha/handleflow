@@ -5,7 +5,9 @@
 #define MAX_LENTH 1024
 
 typedef unsigned int uint32_t;
+typedef unsigned long size_t;
 typedef unsigned long long uint64_t;
+
 
 void printLine(char *path, char *dest, char *addition);
 
@@ -21,7 +23,7 @@ int main(int argc,char **argv) {
 void printLine(char *path, char *dest, char *addition){
     char buffer[MAX_LENTH];
     char buffer1[MAX_LENTH];
-    int len;
+    size_t len;
     uint32_t *data, linenum=0;
     uint64_t *stream1, ret1=0;
     uint32_t *stream2, ret2=0;
@@ -48,13 +50,11 @@ void printLine(char *path, char *dest, char *addition){
             count++;
             if(count==1){
                 ret1 = strtoull(token, &ptr, 16);
-//                printf("Number is %llx\n", ret1);
                 fwrite(stream1, sizeof(ret1), 1, df);
                 fflush(df);
             }
             if(count==3){
                 ret2 = strtoul(token, &ptr, 16);
-//                printf("Number is %x\n", ret2);
                 fwrite(stream2, sizeof(ret2), 1, df);
                 fflush(df);
             }
